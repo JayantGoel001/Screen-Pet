@@ -19,6 +19,17 @@ pupil_left = c.create_oval(140, 145, 150, 155, outline='black', fill='black')
 eye_right = c.create_oval(230, 110, 260, 170, outline='black', fill='white')
 pupil_right = c.create_oval(240, 145, 250, 155, outline='black', fill='black')
 
+mouth_normal = c.create_line(170, 250, 200, 272, 230, 250, smooth=1, width=2, state=NORMAL)
+mouth_happy = c.create_line(170, 250, 200, 282, 230, 250, smooth=1, width=2, state=HIDDEN)
+mouth_sad = c.create_line(170, 250, 200, 232, 230, 250, smooth=1, width=2, state=HIDDEN)
+
+tongue_main = c.create_rectangle(170, 250, 230, 290, outline='red', fill='red')
+tongue_tip = c.create_oval(170, 285, 230, 300, outline='red', fill='red')
+
+cheek_left = c.create_oval(70, 180, 120, 230, outline='pink', fill='pink', state=HIDDEN)
+cheek_right = c.create_oval(280, 180, 330, 230, outline='pink', fill='pink', state=HIDDEN)
+
+
 c.pack()
 
 win.mainloop()
