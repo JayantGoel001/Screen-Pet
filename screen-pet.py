@@ -59,15 +59,17 @@ def show_happy(event):
         c.itemconfigure(mouth_sad, state=HIDDEN)
         c.happy_level = 10
 
+
 def sad():
-    if c.happy_level==0:
+    if c.happy_level == 0:
         c.itemconfigure(mouth_happy, state=HIDDEN)
         c.itemconfigure(mouth_normal, state=HIDDEN)
         c.itemconfigure(mouth_sad, state=NORMAL)
     else:
-        c.happy_level-=1
+        c.happy_level -= 1
 
-    win.after(500,sad)
+    win.after(500, sad)
+
 
 def cheeky(event):
     togglePupil()
