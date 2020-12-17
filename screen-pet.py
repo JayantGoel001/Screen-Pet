@@ -1,5 +1,24 @@
 from tkinter import *
 
+
+def toggleEyes():
+    current_color = c.itemcget(eye_left, 'fill')
+    new_color = c.body_color if current_color == 'white' else 'white'
+    c.itemconfig(eye_left, new_color)
+    c.itemcget(eye_right, new_color)
+
+    current_state = c.itemcget(pupil_left, 'state')
+    new_state = NORMAL if current_state == HIDDEN else HIDDEN
+    c.itemconfig(pupil_left, new_state)
+    c.itemcget(pupil_right, new_state)
+
+
+def Blink():
+    toggleEyes()
+    win.after(250, toggleEyes)
+    win.after(3000, Blink)
+
+
 win = Tk()
 c = Canvas(win, height=400, width=400)
 c.configure(bg='dark blue', highlightthickness=0)
@@ -23,12 +42,11 @@ mouth_normal = c.create_line(170, 250, 200, 272, 230, 250, smooth=1, width=2, st
 mouth_happy = c.create_line(170, 250, 200, 282, 230, 250, smooth=1, width=2, state=HIDDEN)
 mouth_sad = c.create_line(170, 250, 200, 232, 230, 250, smooth=1, width=2, state=HIDDEN)
 
-tongue_main = c.create_rectangle(170, 250, 230, 290, outline='red', fill='red')
-tongue_tip = c.create_oval(170, 285, 230, 300, outline='red', fill='red')
+tongue_main = c.create_rectangle(170, 250, 230, 290, outline='red', fill='red', state=HIDDEN)
+tongue_tip = c.create_oval(170, 285, 230, 300, outline='red', fill='red', state=HIDDEN)
 
 cheek_left = c.create_oval(70, 180, 120, 230, outline='pink', fill='pink', state=HIDDEN)
 cheek_right = c.create_oval(280, 180, 330, 230, outline='pink', fill='pink', state=HIDDEN)
-
 
 c.pack()
 
