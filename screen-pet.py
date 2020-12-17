@@ -4,13 +4,13 @@ from tkinter import *
 def toggleEyes():
     current_color = c.itemcget(eye_left, 'fill')
     new_color = c.body_color if current_color == 'white' else 'white'
-    c.itemconfig(eye_left, new_color)
-    c.itemcget(eye_right, new_color)
+    c.itemconfigure(eye_left, fill=new_color)
+    c.itemconfigure(eye_right, fill=new_color)
 
     current_state = c.itemcget(pupil_left, 'state')
     new_state = NORMAL if current_state == HIDDEN else HIDDEN
-    c.itemconfig(pupil_left, new_state)
-    c.itemcget(pupil_right, new_state)
+    c.itemconfigure(pupil_left, state=new_state)
+    c.itemconfigure(pupil_right, state=new_state)
 
 
 def Blink():
@@ -113,5 +113,12 @@ c.pack()
 c.crossed_eyes = False
 c.tongue_out = False
 c.happy_level = 10
+
+c.bind("<Motion>", show_happy)
+c.bind("<Leave>", hide_happy)
+c.bind("<Double-1>", cheeky)
+
+win.after(1000, Blink)
+win.after(5000, sad)
 
 win.mainloop()
