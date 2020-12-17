@@ -1,6 +1,5 @@
 from tkinter import *
 
-
 def toggleEyes():
     current_color = c.itemcget(eye_left, 'fill')
     new_color = c.body_color if current_color == 'white' else 'white'
@@ -40,6 +39,12 @@ def toggleTongue():
         c.itemconfigure(tongue_main, state=HIDDEN)
         c.tongue_out = False
 
+def cheeky(event):
+    toggleTongue()
+    togglePupil()
+    hide_happy(event)
+    win.after(1000, toggleTongue)
+    win.after(1000, togglePupil)
 
 def hide_happy(event):
     c.itemconfigure(cheek_left, state=HIDDEN)
@@ -47,11 +52,10 @@ def hide_happy(event):
     c.itemconfigure(mouth_happy, state=HIDDEN)
     c.itemconfigure(mouth_normal, state=NORMAL)
     c.itemconfigure(mouth_sad, state=HIDDEN)
-    c.happy_level = 10
 
 
 def show_happy(event):
-    if (20 <= event.x <= 350) and (20 < event.y <= 350):
+    if (20 <= event.x <= 350) and (20 <= event.y <= 350):
         c.itemconfigure(cheek_left, state=NORMAL)
         c.itemconfigure(cheek_right, state=NORMAL)
         c.itemconfigure(mouth_happy, state=NORMAL)
@@ -69,14 +73,6 @@ def sad():
         c.happy_level -= 1
 
     win.after(500, sad)
-
-
-def cheeky(event):
-    togglePupil()
-    toggleTongue()
-    hide_happy(event)
-    win.after(1000, togglePupil())
-    win.after(1000, toggleTongue())
 
 
 win = Tk()
@@ -110,13 +106,13 @@ cheek_right = c.create_oval(280, 180, 330, 230, outline='pink', fill='pink', sta
 
 c.pack()
 
+c.bind("<Motion>", show_happy)
+c.bind("<Leave>", hide_happy)
+c.bind('<Double-1>', cheeky)
+
 c.crossed_eyes = False
 c.tongue_out = False
 c.happy_level = 10
-
-c.bind("<Motion>", show_happy)
-c.bind("<Leave>", hide_happy)
-c.bind("<Double-1>", cheeky)
 
 win.after(1000, Blink)
 win.after(5000, sad)
