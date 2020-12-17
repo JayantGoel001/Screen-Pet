@@ -42,7 +42,22 @@ def toggleTongue():
 
 
 def hide_happy(event):
+    c.itemconfigure(cheek_left, state=HIDDEN)
+    c.itemconfigure(cheek_right, state=HIDDEN)
+    c.itemconfigure(mouth_happy, state=HIDDEN)
+    c.itemconfigure(mouth_normal, state=NORMAL)
+    c.itemconfigure(mouth_sad, state=HIDDEN)
+    c.happy_level = 10
 
+
+def show_happy(event):
+    if (20 <= event.x <= 350) and (20 < event.y <= 350):
+        c.itemconfigure(cheek_left, state=NORMAL)
+        c.itemconfigure(cheek_right, state=NORMAL)
+        c.itemconfigure(mouth_happy, state=NORMAL)
+        c.itemconfigure(mouth_normal, state=HIDDEN)
+        c.itemconfigure(mouth_sad, state=HIDDEN)
+        c.happy_level = 10
 
 
 def cheeky(event):
@@ -86,5 +101,6 @@ c.pack()
 
 c.crossed_eyes = False
 c.tongue_out = False
+c.happy_level = 0
 
 win.mainloop()
