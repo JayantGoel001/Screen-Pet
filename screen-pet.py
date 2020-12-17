@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 def toggleEyes():
     current_color = c.itemcget(eye_left, 'fill')
     new_color = c.body_color if current_color == 'white' else 'white'
@@ -39,12 +40,14 @@ def toggleTongue():
         c.itemconfigure(tongue_main, state=HIDDEN)
         c.tongue_out = False
 
+
 def cheeky(event):
     toggleTongue()
     togglePupil()
     hide_happy(event)
     win.after(1000, toggleTongue)
     win.after(1000, togglePupil)
+
 
 def hide_happy(event):
     c.itemconfigure(cheek_left, state=HIDDEN)
@@ -65,7 +68,7 @@ def show_happy(event):
 
 
 def sad():
-    if c.happy_level == 0:
+    if c.happy_level == 0 and not c.tongue_out:
         c.itemconfigure(mouth_happy, state=HIDDEN)
         c.itemconfigure(mouth_normal, state=HIDDEN)
         c.itemconfigure(mouth_sad, state=NORMAL)
