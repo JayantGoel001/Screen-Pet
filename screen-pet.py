@@ -19,6 +19,40 @@ def Blink():
     win.after(3000, Blink)
 
 
+def togglePupil():
+    if not c.crossed_eyes:
+        c.move(pupil_left, 10, -5)
+        c.move(pupil_right, -10, -5)
+        c.crossed_eyes = True
+    else:
+        c.move(pupil_left, -10, 5)
+        c.move(pupil_right, 10, 5)
+        c.crossed_eyes = False
+
+
+def toggleTongue():
+    if not c.tongue_out:
+        c.itemconfigure(tongue_tip, state=NORMAL)
+        c.itemconfigure(tongue_main, state=NORMAL)
+        c.tongue_out = True
+    else:
+        c.itemconfigure(tongue_tip, state=HIDDEN)
+        c.itemconfigure(tongue_main, state=HIDDEN)
+        c.tongue_out = False
+
+
+def hide_happy(event):
+
+
+
+def cheeky(event):
+    togglePupil()
+    toggleTongue()
+    hide_happy(event)
+    win.after(1000, togglePupil())
+    win.after(1000, toggleTongue())
+
+
 win = Tk()
 c = Canvas(win, height=400, width=400)
 c.configure(bg='dark blue', highlightthickness=0)
@@ -49,5 +83,8 @@ cheek_left = c.create_oval(70, 180, 120, 230, outline='pink', fill='pink', state
 cheek_right = c.create_oval(280, 180, 330, 230, outline='pink', fill='pink', state=HIDDEN)
 
 c.pack()
+
+c.crossed_eyes = False
+c.tongue_out = False
 
 win.mainloop()
